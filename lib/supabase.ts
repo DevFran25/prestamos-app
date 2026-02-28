@@ -1,6 +1,11 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
+import Constants from "expo-constants";
 
-const supabaseUrl = 'https://spxzntyzbmodrwhvorbs.supabase.co'
-const supabaseKey = 'sb_publishable_lURq-NIfBH2_eDBTz9xUGg_cxuBV7-w'
+const supabaseUrl = Constants.expoConfig?.extra?.supabaseUrl as string;
+const supabaseKey = Constants.expoConfig?.extra?.supabaseKey as string;
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error("Faltan variables de entorno de Supabase");
+}
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
